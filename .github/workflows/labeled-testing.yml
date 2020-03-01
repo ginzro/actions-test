@@ -1,9 +1,7 @@
-name: Create Pull Request Environment
+name: Deployment
 
 on:
   push:
-    branches:
-      - master
     tags:
       - staging/*
       - prod/*
