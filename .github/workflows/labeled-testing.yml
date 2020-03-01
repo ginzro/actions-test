@@ -32,15 +32,13 @@ jobs:
           echo $ENV
           echo $VERSION
 
-  build2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Github Context
+      - name: staging run
+        if: env.ENV == 'staging'
         run: |
-          echo "${ENV}" 
-          echo "${VERSION}" 
+          echo "this is staging"
+
+      - name: prod run
+        if: env.ENV == 'prod'
+        run: |
+          echo "this is prod"
 
