@@ -20,3 +20,17 @@ jobs:
         run: |
           echo "${GITHUB_CONTEXT}" 
 
+      - name: set env
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "::set-env name=ENV::$(echo $REF | grep -o "staging\|prod")"
+          echo "::set-env name=VERSION::$(echo "refs/tags/staging/v3" | sed -e  "s#.*/##g")"
+          echo "::set-env name=TAG::$("$ENV-$VERSION")"
+
+      - name: confirm env
+        run: |
+          echo $ENV
+          echo $VERSION
+          echo $TAG
+
