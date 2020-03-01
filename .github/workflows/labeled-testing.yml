@@ -1,0 +1,24 @@
+name: Create Pull Request Environment
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - staging/*
+      - prod/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Github Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "${GITHUB_CONTEXT}" 
+
