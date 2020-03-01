@@ -42,3 +42,9 @@ jobs:
         run: |
           echo "this is prod"
 
+      - name: show secret
+        env:
+          SECRET: ${{ format('secrets.{0}_secret', env.ENV) }}
+        run: |
+          echo $SECRET
+
