@@ -44,7 +44,7 @@ jobs:
 
       - name: show secret
         env:
-          SECRET: ${{ format('secrets.{0}_secret', env.ENV) }}
+          SECRET: ${{ secrets["${{ env.ENV }}_secret"] }}
         run: |
           echo $SECRET
 
