@@ -20,6 +20,8 @@ jobs:
           echo "${GITHUB_CONTEXT}"
 
       - name: set env
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         run: |
           echo "::set-env name=ENV::dev"
           ./increment-patch.sh
