@@ -1,4 +1,5 @@
-#!/usr/bin/env bash -xe
+#!/usr/bin/env bash
+set -xe
 
 latest=$(git tag -l --sort=v:refname | grep "^v[0-9]\+\.[0-9]\+\.[0-9]\+" | sort -r | head -n 1)
 current_patch=$(echo $latest | grep -o "[0-9]\+$")
