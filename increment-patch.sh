@@ -11,7 +11,7 @@ git tag $new
 # create reference
 curl -d @- --request POST \
         --url https://api.github.com/repos/${GITHUB_REPOSITORY}/git/tags \
-        --header "Authorization: token $GITHUB_TOKEN" \
+        --header "Authorization: Bearer $GITHUB_TOKEN" \
         --header 'Content-Type: application/json' \
         --header "Accept: application/vnd.github.v3+json" <<EOF
 {
@@ -25,7 +25,7 @@ EOF
 # create tags
 curl -d @- --request POST \
         --url https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs \
-        --header "Authorization: token $GITHUB_TOKEN" \
+        --header "Authorization: Bearer $GITHUB_TOKEN" \
         --header 'Content-Type: application/json' \
         --header "Accept: application/vnd.github.v3+json" <<EOF
 {
