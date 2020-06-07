@@ -8,7 +8,8 @@ major_minor=$(echo $latest | grep -o "^v[0-9]\+\.[0-9]\+\.")
 new=$major_minor$patch
 
 git tag $new
-curl -v -d @- --request POST \
+# create reference
+curl -d @- --request POST \
         --url https://api.github.com/repos/${GITHUB_REPOSITORY}/git/tags \
         --header "Authorization: token $GITHUB_TOKEN" \
         --header 'Content-Type: application/json' \
@@ -18,6 +19,18 @@ curl -v -d @- --request POST \
   "message": "This tag created by Github Actions",
   "object": "${GITHUB_SHA}",
   "type": "commit"
+}
+EOF
+
+# create tags
+curl -d @- --request POST \
+        --url https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs \
+        --header "Authorization: token $GITHUB_TOKEN" \
+        --header 'Content-Type: application/json' \
+        --header "Accept: application/vnd.github.v3+json" <<EOF
+{
+  "ref": "refs/tags/${new}",
+  "sha": "${GITHUB_SHA}"
 }
 EOF
 
