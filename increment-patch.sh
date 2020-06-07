@@ -8,3 +8,4 @@ major_minor=$(echo $latest | grep -o "^v[0-9]\+\.[0-9]\+\.")
 new=$major_minor$patch
 
 git tag $new
+git push --tags
