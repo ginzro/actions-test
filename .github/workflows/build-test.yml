@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "::set-env name=ENV::dev"
           ./increment-patch.sh
-          echo "::set-env name=VERSION::$(git tag -l --sort=v:refname | sort -r | head -n 1)"
+          echo "::set-env name=VERSION::$(git tag -l --sort=v:refname | sort -r -V | head -n 1)"
 
       - name: Build nginx image
         run: |
