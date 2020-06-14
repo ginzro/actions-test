@@ -22,7 +22,7 @@ jobs:
 
       - name: set env
         run: |
-          echo "::set-env name=ENV::$(echo $REF | grep -o "staging\|production")"
+          echo "::set-env name=ENV::$(echo ${{ github.ref }} | grep -o "staging\|production")"
           export $VERSION=$(git tag -l --sort=v:refname | sort -r -V | head -n 1)
           echo "::set-env name=VERSION::$VERSION"
           echo "::set-env name=DEPLOYMENT_SHA::$(git rev-parse $VERSION)"
